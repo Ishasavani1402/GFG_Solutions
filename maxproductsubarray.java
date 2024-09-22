@@ -29,6 +29,7 @@
 // -102 ≤ arr[i] ≤ 102
 public class maxproductsubarray {
 
+    //oproach-1
     static long product(int arr[]) {
         long p1 = arr[0], p2 = arr[0], r = arr[0];
         for (int i = 1; i < arr.length; i++) {
@@ -39,6 +40,19 @@ public class maxproductsubarray {
         }
         return r;
     }
+    //opproach-2
+     static long product(int arr[]) {
+        int pref=1,suff=1,ans=Integer.MIN_VALUE;
+        for(int i=0;i<arr.length;i++){
+            if(pref==0) pref=1;
+            if(suff==0) suff=1;
+            pref*=arr[i];
+            suff*=arr[arr.length-i-1];
+            ans=Math.max(ans, Math.max(pref, suff));
+        }
+        return ans;
+    }
+
 
     public static void main(String[] args) {
         int arr[] = { 6, -3, -10, 0, 2 };
